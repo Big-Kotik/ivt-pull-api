@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PullerClient interface {
-	PullResource(ctx context.Context, in *HttpRequestsWrapper, opts ...grpc.CallOption) (Puller_PullResourceClient, error)
+	PullResources(ctx context.Context, in *HttpRequests, opts ...grpc.CallOption) (Puller_PullResourcesClient, error)
 }
 
 type pullerClient struct {
@@ -33,12 +33,12 @@ func NewPullerClient(cc grpc.ClientConnInterface) PullerClient {
 	return &pullerClient{cc}
 }
 
-func (c *pullerClient) PullResource(ctx context.Context, in *HttpRequestsWrapper, opts ...grpc.CallOption) (Puller_PullResourceClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Puller_ServiceDesc.Streams[0], "/pull.Puller/PullResource", opts...)
+func (c *pullerClient) PullResources(ctx context.Context, in *HttpRequests, opts ...grpc.CallOption) (Puller_PullResourcesClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Puller_ServiceDesc.Streams[0], "/pull.Puller/PullResources", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &pullerPullResourceClient{stream}
+	x := &pullerPullResourcesClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -48,17 +48,17 @@ func (c *pullerClient) PullResource(ctx context.Context, in *HttpRequestsWrapper
 	return x, nil
 }
 
-type Puller_PullResourceClient interface {
-	Recv() (*Response, error)
+type Puller_PullResourcesClient interface {
+	Recv() (*HttpResponse, error)
 	grpc.ClientStream
 }
 
-type pullerPullResourceClient struct {
+type pullerPullResourcesClient struct {
 	grpc.ClientStream
 }
 
-func (x *pullerPullResourceClient) Recv() (*Response, error) {
-	m := new(Response)
+func (x *pullerPullResourcesClient) Recv() (*HttpResponse, error) {
+	m := new(HttpResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ func (x *pullerPullResourceClient) Recv() (*Response, error) {
 // All implementations must embed UnimplementedPullerServer
 // for forward compatibility
 type PullerServer interface {
-	PullResource(*HttpRequestsWrapper, Puller_PullResourceServer) error
+	PullResources(*HttpRequests, Puller_PullResourcesServer) error
 	mustEmbedUnimplementedPullerServer()
 }
 
@@ -77,8 +77,8 @@ type PullerServer interface {
 type UnimplementedPullerServer struct {
 }
 
-func (UnimplementedPullerServer) PullResource(*HttpRequestsWrapper, Puller_PullResourceServer) error {
-	return status.Errorf(codes.Unimplemented, "method PullResource not implemented")
+func (UnimplementedPullerServer) PullResources(*HttpRequests, Puller_PullResourcesServer) error {
+	return status.Errorf(codes.Unimplemented, "method PullResources not implemented")
 }
 func (UnimplementedPullerServer) mustEmbedUnimplementedPullerServer() {}
 
@@ -93,24 +93,24 @@ func RegisterPullerServer(s grpc.ServiceRegistrar, srv PullerServer) {
 	s.RegisterService(&Puller_ServiceDesc, srv)
 }
 
-func _Puller_PullResource_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(HttpRequestsWrapper)
+func _Puller_PullResources_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(HttpRequests)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(PullerServer).PullResource(m, &pullerPullResourceServer{stream})
+	return srv.(PullerServer).PullResources(m, &pullerPullResourcesServer{stream})
 }
 
-type Puller_PullResourceServer interface {
-	Send(*Response) error
+type Puller_PullResourcesServer interface {
+	Send(*HttpResponse) error
 	grpc.ServerStream
 }
 
-type pullerPullResourceServer struct {
+type pullerPullResourcesServer struct {
 	grpc.ServerStream
 }
 
-func (x *pullerPullResourceServer) Send(m *Response) error {
+func (x *pullerPullResourcesServer) Send(m *HttpResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -123,8 +123,8 @@ var Puller_ServiceDesc = grpc.ServiceDesc{
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "PullResource",
-			Handler:       _Puller_PullResource_Handler,
+			StreamName:    "PullResources",
+			Handler:       _Puller_PullResources_Handler,
 			ServerStreams: true,
 		},
 	},

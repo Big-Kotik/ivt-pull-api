@@ -4,30 +4,30 @@ package pull;
 
 option go_package = "github.com/Big-Kotik/ivt-pull-api/pkg/api";
 
-message header {
+message Header {
     repeated string keys = 1;
 }
 
-message HttpRequestsWrapper {
-    message Request {
+message HttpRequests {
+    message HttpRequest {
         string url = 1;
         string method = 2;
         string body = 3;
-        map<string, header> headers = 4;
+        map<string, Header> headers = 4;
     }
 
-    repeated Request requests = 1;
+    repeated HttpRequest requests = 1;
 }
 
-message Response {
+message HttpResponse {
     int32 statusCode = 1;
     int32 protoMajor = 2;
     int32 protoMinor = 3;
-    map<string, header> header = 4;
+    map<string, Header> header = 4;
     bytes body = 5;
     int64 contentLength = 6;
 }
 
 service Puller {
-    rpc PullResource(HttpRequestsWrapper) returns (stream Response) {};
+    rpc PullResources(HttpRequests) returns (stream HttpResponse) {};
 }
