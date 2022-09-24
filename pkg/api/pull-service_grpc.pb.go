@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PullerClient interface {
-	PullResource(ctx context.Context, in *HttpRequestsWrapper, opts ...grpc.CallOption) (*ZippedResponses, error)
+	PullResource(ctx context.Context, in *HttpRequestsWrapper, opts ...grpc.CallOption) (Puller_PullResourceClient, error)
 }
 
 type pullerClient struct {
@@ -33,20 +33,43 @@ func NewPullerClient(cc grpc.ClientConnInterface) PullerClient {
 	return &pullerClient{cc}
 }
 
-func (c *pullerClient) PullResource(ctx context.Context, in *HttpRequestsWrapper, opts ...grpc.CallOption) (*ZippedResponses, error) {
-	out := new(ZippedResponses)
-	err := c.cc.Invoke(ctx, "/pull.Puller/PullResource", in, out, opts...)
+func (c *pullerClient) PullResource(ctx context.Context, in *HttpRequestsWrapper, opts ...grpc.CallOption) (Puller_PullResourceClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Puller_ServiceDesc.Streams[0], "/pull.Puller/PullResource", opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &pullerPullResourceClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Puller_PullResourceClient interface {
+	Recv() (*Response, error)
+	grpc.ClientStream
+}
+
+type pullerPullResourceClient struct {
+	grpc.ClientStream
+}
+
+func (x *pullerPullResourceClient) Recv() (*Response, error) {
+	m := new(Response)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 // PullerServer is the server API for Puller service.
 // All implementations must embed UnimplementedPullerServer
 // for forward compatibility
 type PullerServer interface {
-	PullResource(context.Context, *HttpRequestsWrapper) (*ZippedResponses, error)
+	PullResource(*HttpRequestsWrapper, Puller_PullResourceServer) error
 	mustEmbedUnimplementedPullerServer()
 }
 
@@ -54,8 +77,8 @@ type PullerServer interface {
 type UnimplementedPullerServer struct {
 }
 
-func (UnimplementedPullerServer) PullResource(context.Context, *HttpRequestsWrapper) (*ZippedResponses, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PullResource not implemented")
+func (UnimplementedPullerServer) PullResource(*HttpRequestsWrapper, Puller_PullResourceServer) error {
+	return status.Errorf(codes.Unimplemented, "method PullResource not implemented")
 }
 func (UnimplementedPullerServer) mustEmbedUnimplementedPullerServer() {}
 
@@ -70,22 +93,25 @@ func RegisterPullerServer(s grpc.ServiceRegistrar, srv PullerServer) {
 	s.RegisterService(&Puller_ServiceDesc, srv)
 }
 
-func _Puller_PullResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HttpRequestsWrapper)
-	if err := dec(in); err != nil {
-		return nil, err
+func _Puller_PullResource_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(HttpRequestsWrapper)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(PullerServer).PullResource(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pull.Puller/PullResource",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PullerServer).PullResource(ctx, req.(*HttpRequestsWrapper))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(PullerServer).PullResource(m, &pullerPullResourceServer{stream})
+}
+
+type Puller_PullResourceServer interface {
+	Send(*Response) error
+	grpc.ServerStream
+}
+
+type pullerPullResourceServer struct {
+	grpc.ServerStream
+}
+
+func (x *pullerPullResourceServer) Send(m *Response) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 // Puller_ServiceDesc is the grpc.ServiceDesc for Puller service.
@@ -94,12 +120,13 @@ func _Puller_PullResource_Handler(srv interface{}, ctx context.Context, dec func
 var Puller_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "pull.Puller",
 	HandlerType: (*PullerServer)(nil),
-	Methods: []grpc.MethodDesc{
+	Methods:     []grpc.MethodDesc{},
+	Streams: []grpc.StreamDesc{
 		{
-			MethodName: "PullResource",
-			Handler:    _Puller_PullResource_Handler,
+			StreamName:    "PullResource",
+			Handler:       _Puller_PullResource_Handler,
+			ServerStreams: true,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
 	Metadata: "pull-service.proto",
 }

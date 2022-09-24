@@ -15,10 +15,15 @@ message HttpRequestsWrapper {
     repeated Request requests = 1;
 }
 
-message ZippedResponses {
-    repeated bytes responses = 1;
+message Response {
+    int32 statusCode = 1;
+    int32 protoMajor = 2;
+    int32 protoMinor = 3;
+    map<string, string> header = 4;
+    bytes body = 5;
+    int64 contentLength = 6;
 }
 
 service Puller {
-    rpc PullResource(HttpRequestsWrapper) returns (ZippedResponses) {};
+    rpc PullResource(HttpRequestsWrapper) returns (stream Response) {};
 }
