@@ -4,54 +4,15 @@ package pull;
 
 option go_package = "github.com/Big-Kotik/ivt-pull-api/pkg/api";
 
-
-message GetMessage {
-    string url = 1;
-}
-
-message PostMessage {
-    string url = 1;
-}
-
-message DeleteMessage {
-    string url = 1;
-}
-
-message HeadMessage {
-    string url = 1;
-}
-
-message OptionsMessage {
-    string url = 1;
-}
-
-message PatchMessage {
-    string url = 1;
-}
-
-message PutMessage {
-    string url = 1;
-}
-
-message TraceMessage {
-    string url = 1;
-}
-
-message HttpRequestWrapper {
-    message RequestWraper {
-        oneof request {
-            GetMessage get = 1;
-            PostMessage post = 2;
-            DeleteMessage delete = 3;
-            HeadMessage head = 4;
-            OptionsMessage options = 5;
-            PatchMessage patch = 6;
-            PutMessage put = 7;
-            TraceMessage trace = 8;
-        }
+message HttpRequestsWrapper {
+    message Request {
+        string url = 1;
+        string method = 2;
+        string body = 3;
+        map<string, string> headers = 4;
     }
 
-    repeated RequestWraper requests = 1;
+    repeated Request requests = 1;
 }
 
 message ZippedResponses {
@@ -59,5 +20,5 @@ message ZippedResponses {
 }
 
 service Puller {
-    rpc PullResource(HttpRequestWrapper) returns (ZippedResponses) {};
+    rpc PullResource(HttpRequestsWrapper) returns (ZippedResponses) {};
 }

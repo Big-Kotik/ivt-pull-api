@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PullerClient interface {
-	PullResource(ctx context.Context, in *HttpRequestWrapper, opts ...grpc.CallOption) (*ZippedResponses, error)
+	PullResource(ctx context.Context, in *HttpRequestsWrapper, opts ...grpc.CallOption) (*ZippedResponses, error)
 }
 
 type pullerClient struct {
@@ -33,7 +33,7 @@ func NewPullerClient(cc grpc.ClientConnInterface) PullerClient {
 	return &pullerClient{cc}
 }
 
-func (c *pullerClient) PullResource(ctx context.Context, in *HttpRequestWrapper, opts ...grpc.CallOption) (*ZippedResponses, error) {
+func (c *pullerClient) PullResource(ctx context.Context, in *HttpRequestsWrapper, opts ...grpc.CallOption) (*ZippedResponses, error) {
 	out := new(ZippedResponses)
 	err := c.cc.Invoke(ctx, "/pull.Puller/PullResource", in, out, opts...)
 	if err != nil {
@@ -46,7 +46,7 @@ func (c *pullerClient) PullResource(ctx context.Context, in *HttpRequestWrapper,
 // All implementations must embed UnimplementedPullerServer
 // for forward compatibility
 type PullerServer interface {
-	PullResource(context.Context, *HttpRequestWrapper) (*ZippedResponses, error)
+	PullResource(context.Context, *HttpRequestsWrapper) (*ZippedResponses, error)
 	mustEmbedUnimplementedPullerServer()
 }
 
@@ -54,7 +54,7 @@ type PullerServer interface {
 type UnimplementedPullerServer struct {
 }
 
-func (UnimplementedPullerServer) PullResource(context.Context, *HttpRequestWrapper) (*ZippedResponses, error) {
+func (UnimplementedPullerServer) PullResource(context.Context, *HttpRequestsWrapper) (*ZippedResponses, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PullResource not implemented")
 }
 func (UnimplementedPullerServer) mustEmbedUnimplementedPullerServer() {}
@@ -71,7 +71,7 @@ func RegisterPullerServer(s grpc.ServiceRegistrar, srv PullerServer) {
 }
 
 func _Puller_PullResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HttpRequestWrapper)
+	in := new(HttpRequestsWrapper)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ func _Puller_PullResource_Handler(srv interface{}, ctx context.Context, dec func
 		FullMethod: "/pull.Puller/PullResource",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PullerServer).PullResource(ctx, req.(*HttpRequestWrapper))
+		return srv.(PullerServer).PullResource(ctx, req.(*HttpRequestsWrapper))
 	}
 	return interceptor(ctx, in, info, handler)
 }

@@ -20,16 +20,16 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type GetMessage struct {
+type HttpRequestsWrapper struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	Requests []*HttpRequestsWrapper_Request `protobuf:"bytes,1,rep,name=requests,proto3" json:"requests,omitempty"`
 }
 
-func (x *GetMessage) Reset() {
-	*x = GetMessage{}
+func (x *HttpRequestsWrapper) Reset() {
+	*x = HttpRequestsWrapper{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_pull_service_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -37,13 +37,13 @@ func (x *GetMessage) Reset() {
 	}
 }
 
-func (x *GetMessage) String() string {
+func (x *HttpRequestsWrapper) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetMessage) ProtoMessage() {}
+func (*HttpRequestsWrapper) ProtoMessage() {}
 
-func (x *GetMessage) ProtoReflect() protoreflect.Message {
+func (x *HttpRequestsWrapper) ProtoReflect() protoreflect.Message {
 	mi := &file_pull_service_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -55,388 +55,12 @@ func (x *GetMessage) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMessage.ProtoReflect.Descriptor instead.
-func (*GetMessage) Descriptor() ([]byte, []int) {
+// Deprecated: Use HttpRequestsWrapper.ProtoReflect.Descriptor instead.
+func (*HttpRequestsWrapper) Descriptor() ([]byte, []int) {
 	return file_pull_service_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *GetMessage) GetUrl() string {
-	if x != nil {
-		return x.Url
-	}
-	return ""
-}
-
-type PostMessage struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-}
-
-func (x *PostMessage) Reset() {
-	*x = PostMessage{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_pull_service_proto_msgTypes[1]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *PostMessage) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PostMessage) ProtoMessage() {}
-
-func (x *PostMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_pull_service_proto_msgTypes[1]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PostMessage.ProtoReflect.Descriptor instead.
-func (*PostMessage) Descriptor() ([]byte, []int) {
-	return file_pull_service_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *PostMessage) GetUrl() string {
-	if x != nil {
-		return x.Url
-	}
-	return ""
-}
-
-type DeleteMessage struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-}
-
-func (x *DeleteMessage) Reset() {
-	*x = DeleteMessage{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_pull_service_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *DeleteMessage) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteMessage) ProtoMessage() {}
-
-func (x *DeleteMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_pull_service_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteMessage.ProtoReflect.Descriptor instead.
-func (*DeleteMessage) Descriptor() ([]byte, []int) {
-	return file_pull_service_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *DeleteMessage) GetUrl() string {
-	if x != nil {
-		return x.Url
-	}
-	return ""
-}
-
-type HeadMessage struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-}
-
-func (x *HeadMessage) Reset() {
-	*x = HeadMessage{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_pull_service_proto_msgTypes[3]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *HeadMessage) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*HeadMessage) ProtoMessage() {}
-
-func (x *HeadMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_pull_service_proto_msgTypes[3]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use HeadMessage.ProtoReflect.Descriptor instead.
-func (*HeadMessage) Descriptor() ([]byte, []int) {
-	return file_pull_service_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *HeadMessage) GetUrl() string {
-	if x != nil {
-		return x.Url
-	}
-	return ""
-}
-
-type OptionsMessage struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-}
-
-func (x *OptionsMessage) Reset() {
-	*x = OptionsMessage{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_pull_service_proto_msgTypes[4]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *OptionsMessage) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OptionsMessage) ProtoMessage() {}
-
-func (x *OptionsMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_pull_service_proto_msgTypes[4]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use OptionsMessage.ProtoReflect.Descriptor instead.
-func (*OptionsMessage) Descriptor() ([]byte, []int) {
-	return file_pull_service_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *OptionsMessage) GetUrl() string {
-	if x != nil {
-		return x.Url
-	}
-	return ""
-}
-
-type PatchMessage struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-}
-
-func (x *PatchMessage) Reset() {
-	*x = PatchMessage{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_pull_service_proto_msgTypes[5]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *PatchMessage) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PatchMessage) ProtoMessage() {}
-
-func (x *PatchMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_pull_service_proto_msgTypes[5]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PatchMessage.ProtoReflect.Descriptor instead.
-func (*PatchMessage) Descriptor() ([]byte, []int) {
-	return file_pull_service_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *PatchMessage) GetUrl() string {
-	if x != nil {
-		return x.Url
-	}
-	return ""
-}
-
-type PutMessage struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-}
-
-func (x *PutMessage) Reset() {
-	*x = PutMessage{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_pull_service_proto_msgTypes[6]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *PutMessage) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PutMessage) ProtoMessage() {}
-
-func (x *PutMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_pull_service_proto_msgTypes[6]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PutMessage.ProtoReflect.Descriptor instead.
-func (*PutMessage) Descriptor() ([]byte, []int) {
-	return file_pull_service_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *PutMessage) GetUrl() string {
-	if x != nil {
-		return x.Url
-	}
-	return ""
-}
-
-type TraceMessage struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-}
-
-func (x *TraceMessage) Reset() {
-	*x = TraceMessage{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_pull_service_proto_msgTypes[7]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *TraceMessage) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TraceMessage) ProtoMessage() {}
-
-func (x *TraceMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_pull_service_proto_msgTypes[7]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TraceMessage.ProtoReflect.Descriptor instead.
-func (*TraceMessage) Descriptor() ([]byte, []int) {
-	return file_pull_service_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *TraceMessage) GetUrl() string {
-	if x != nil {
-		return x.Url
-	}
-	return ""
-}
-
-type HttpRequestWrapper struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Requests []*HttpRequestWrapper_RequestWraper `protobuf:"bytes,1,rep,name=requests,proto3" json:"requests,omitempty"`
-}
-
-func (x *HttpRequestWrapper) Reset() {
-	*x = HttpRequestWrapper{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_pull_service_proto_msgTypes[8]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *HttpRequestWrapper) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*HttpRequestWrapper) ProtoMessage() {}
-
-func (x *HttpRequestWrapper) ProtoReflect() protoreflect.Message {
-	mi := &file_pull_service_proto_msgTypes[8]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use HttpRequestWrapper.ProtoReflect.Descriptor instead.
-func (*HttpRequestWrapper) Descriptor() ([]byte, []int) {
-	return file_pull_service_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *HttpRequestWrapper) GetRequests() []*HttpRequestWrapper_RequestWraper {
+func (x *HttpRequestsWrapper) GetRequests() []*HttpRequestsWrapper_Request {
 	if x != nil {
 		return x.Requests
 	}
@@ -454,7 +78,7 @@ type ZippedResponses struct {
 func (x *ZippedResponses) Reset() {
 	*x = ZippedResponses{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_pull_service_proto_msgTypes[9]
+		mi := &file_pull_service_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -467,7 +91,7 @@ func (x *ZippedResponses) String() string {
 func (*ZippedResponses) ProtoMessage() {}
 
 func (x *ZippedResponses) ProtoReflect() protoreflect.Message {
-	mi := &file_pull_service_proto_msgTypes[9]
+	mi := &file_pull_service_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -480,7 +104,7 @@ func (x *ZippedResponses) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZippedResponses.ProtoReflect.Descriptor instead.
 func (*ZippedResponses) Descriptor() ([]byte, []int) {
-	return file_pull_service_proto_rawDescGZIP(), []int{9}
+	return file_pull_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ZippedResponses) GetResponses() [][]byte {
@@ -490,40 +114,34 @@ func (x *ZippedResponses) GetResponses() [][]byte {
 	return nil
 }
 
-type HttpRequestWrapper_RequestWraper struct {
+type HttpRequestsWrapper_Request struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Types that are assignable to Request:
-	//	*HttpRequestWrapper_RequestWraper_Get
-	//	*HttpRequestWrapper_RequestWraper_Post
-	//	*HttpRequestWrapper_RequestWraper_Delete
-	//	*HttpRequestWrapper_RequestWraper_Head
-	//	*HttpRequestWrapper_RequestWraper_Options
-	//	*HttpRequestWrapper_RequestWraper_Patch
-	//	*HttpRequestWrapper_RequestWraper_Put
-	//	*HttpRequestWrapper_RequestWraper_Trace
-	Request isHttpRequestWrapper_RequestWraper_Request `protobuf_oneof:"request"`
+	Url     string            `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	Method  string            `protobuf:"bytes,2,opt,name=method,proto3" json:"method,omitempty"`
+	Body    string            `protobuf:"bytes,3,opt,name=body,proto3" json:"body,omitempty"`
+	Headers map[string]string `protobuf:"bytes,4,rep,name=headers,proto3" json:"headers,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
-func (x *HttpRequestWrapper_RequestWraper) Reset() {
-	*x = HttpRequestWrapper_RequestWraper{}
+func (x *HttpRequestsWrapper_Request) Reset() {
+	*x = HttpRequestsWrapper_Request{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_pull_service_proto_msgTypes[10]
+		mi := &file_pull_service_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *HttpRequestWrapper_RequestWraper) String() string {
+func (x *HttpRequestsWrapper_Request) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HttpRequestWrapper_RequestWraper) ProtoMessage() {}
+func (*HttpRequestsWrapper_Request) ProtoMessage() {}
 
-func (x *HttpRequestWrapper_RequestWraper) ProtoReflect() protoreflect.Message {
-	mi := &file_pull_service_proto_msgTypes[10]
+func (x *HttpRequestsWrapper_Request) ProtoReflect() protoreflect.Message {
+	mi := &file_pull_service_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -534,188 +152,74 @@ func (x *HttpRequestWrapper_RequestWraper) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HttpRequestWrapper_RequestWraper.ProtoReflect.Descriptor instead.
-func (*HttpRequestWrapper_RequestWraper) Descriptor() ([]byte, []int) {
-	return file_pull_service_proto_rawDescGZIP(), []int{8, 0}
+// Deprecated: Use HttpRequestsWrapper_Request.ProtoReflect.Descriptor instead.
+func (*HttpRequestsWrapper_Request) Descriptor() ([]byte, []int) {
+	return file_pull_service_proto_rawDescGZIP(), []int{0, 0}
 }
 
-func (m *HttpRequestWrapper_RequestWraper) GetRequest() isHttpRequestWrapper_RequestWraper_Request {
-	if m != nil {
-		return m.Request
+func (x *HttpRequestsWrapper_Request) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+func (x *HttpRequestsWrapper_Request) GetMethod() string {
+	if x != nil {
+		return x.Method
+	}
+	return ""
+}
+
+func (x *HttpRequestsWrapper_Request) GetBody() string {
+	if x != nil {
+		return x.Body
+	}
+	return ""
+}
+
+func (x *HttpRequestsWrapper_Request) GetHeaders() map[string]string {
+	if x != nil {
+		return x.Headers
 	}
 	return nil
 }
-
-func (x *HttpRequestWrapper_RequestWraper) GetGet() *GetMessage {
-	if x, ok := x.GetRequest().(*HttpRequestWrapper_RequestWraper_Get); ok {
-		return x.Get
-	}
-	return nil
-}
-
-func (x *HttpRequestWrapper_RequestWraper) GetPost() *PostMessage {
-	if x, ok := x.GetRequest().(*HttpRequestWrapper_RequestWraper_Post); ok {
-		return x.Post
-	}
-	return nil
-}
-
-func (x *HttpRequestWrapper_RequestWraper) GetDelete() *DeleteMessage {
-	if x, ok := x.GetRequest().(*HttpRequestWrapper_RequestWraper_Delete); ok {
-		return x.Delete
-	}
-	return nil
-}
-
-func (x *HttpRequestWrapper_RequestWraper) GetHead() *HeadMessage {
-	if x, ok := x.GetRequest().(*HttpRequestWrapper_RequestWraper_Head); ok {
-		return x.Head
-	}
-	return nil
-}
-
-func (x *HttpRequestWrapper_RequestWraper) GetOptions() *OptionsMessage {
-	if x, ok := x.GetRequest().(*HttpRequestWrapper_RequestWraper_Options); ok {
-		return x.Options
-	}
-	return nil
-}
-
-func (x *HttpRequestWrapper_RequestWraper) GetPatch() *PatchMessage {
-	if x, ok := x.GetRequest().(*HttpRequestWrapper_RequestWraper_Patch); ok {
-		return x.Patch
-	}
-	return nil
-}
-
-func (x *HttpRequestWrapper_RequestWraper) GetPut() *PutMessage {
-	if x, ok := x.GetRequest().(*HttpRequestWrapper_RequestWraper_Put); ok {
-		return x.Put
-	}
-	return nil
-}
-
-func (x *HttpRequestWrapper_RequestWraper) GetTrace() *TraceMessage {
-	if x, ok := x.GetRequest().(*HttpRequestWrapper_RequestWraper_Trace); ok {
-		return x.Trace
-	}
-	return nil
-}
-
-type isHttpRequestWrapper_RequestWraper_Request interface {
-	isHttpRequestWrapper_RequestWraper_Request()
-}
-
-type HttpRequestWrapper_RequestWraper_Get struct {
-	Get *GetMessage `protobuf:"bytes,1,opt,name=get,proto3,oneof"`
-}
-
-type HttpRequestWrapper_RequestWraper_Post struct {
-	Post *PostMessage `protobuf:"bytes,2,opt,name=post,proto3,oneof"`
-}
-
-type HttpRequestWrapper_RequestWraper_Delete struct {
-	Delete *DeleteMessage `protobuf:"bytes,3,opt,name=delete,proto3,oneof"`
-}
-
-type HttpRequestWrapper_RequestWraper_Head struct {
-	Head *HeadMessage `protobuf:"bytes,4,opt,name=head,proto3,oneof"`
-}
-
-type HttpRequestWrapper_RequestWraper_Options struct {
-	Options *OptionsMessage `protobuf:"bytes,5,opt,name=options,proto3,oneof"`
-}
-
-type HttpRequestWrapper_RequestWraper_Patch struct {
-	Patch *PatchMessage `protobuf:"bytes,6,opt,name=patch,proto3,oneof"`
-}
-
-type HttpRequestWrapper_RequestWraper_Put struct {
-	Put *PutMessage `protobuf:"bytes,7,opt,name=put,proto3,oneof"`
-}
-
-type HttpRequestWrapper_RequestWraper_Trace struct {
-	Trace *TraceMessage `protobuf:"bytes,8,opt,name=trace,proto3,oneof"`
-}
-
-func (*HttpRequestWrapper_RequestWraper_Get) isHttpRequestWrapper_RequestWraper_Request() {}
-
-func (*HttpRequestWrapper_RequestWraper_Post) isHttpRequestWrapper_RequestWraper_Request() {}
-
-func (*HttpRequestWrapper_RequestWraper_Delete) isHttpRequestWrapper_RequestWraper_Request() {}
-
-func (*HttpRequestWrapper_RequestWraper_Head) isHttpRequestWrapper_RequestWraper_Request() {}
-
-func (*HttpRequestWrapper_RequestWraper_Options) isHttpRequestWrapper_RequestWraper_Request() {}
-
-func (*HttpRequestWrapper_RequestWraper_Patch) isHttpRequestWrapper_RequestWraper_Request() {}
-
-func (*HttpRequestWrapper_RequestWraper_Put) isHttpRequestWrapper_RequestWraper_Request() {}
-
-func (*HttpRequestWrapper_RequestWraper_Trace) isHttpRequestWrapper_RequestWraper_Request() {}
 
 var File_pull_service_proto protoreflect.FileDescriptor
 
 var file_pull_service_proto_rawDesc = []byte{
 	0x0a, 0x12, 0x70, 0x75, 0x6c, 0x6c, 0x2d, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x12, 0x04, 0x70, 0x75, 0x6c, 0x6c, 0x22, 0x1e, 0x0a, 0x0a, 0x47, 0x65,
-	0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x72, 0x6c, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x75, 0x72, 0x6c, 0x22, 0x1f, 0x0a, 0x0b, 0x50, 0x6f,
-	0x73, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x72, 0x6c,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x75, 0x72, 0x6c, 0x22, 0x21, 0x0a, 0x0d, 0x44,
-	0x65, 0x6c, 0x65, 0x74, 0x65, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x10, 0x0a, 0x03,
-	0x75, 0x72, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x75, 0x72, 0x6c, 0x22, 0x1f,
-	0x0a, 0x0b, 0x48, 0x65, 0x61, 0x64, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x10, 0x0a,
-	0x03, 0x75, 0x72, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x75, 0x72, 0x6c, 0x22,
-	0x22, 0x0a, 0x0e, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
-	0x65, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x72, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03,
-	0x75, 0x72, 0x6c, 0x22, 0x20, 0x0a, 0x0c, 0x50, 0x61, 0x74, 0x63, 0x68, 0x4d, 0x65, 0x73, 0x73,
-	0x61, 0x67, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x72, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x03, 0x75, 0x72, 0x6c, 0x22, 0x1e, 0x0a, 0x0a, 0x50, 0x75, 0x74, 0x4d, 0x65, 0x73, 0x73,
-	0x61, 0x67, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x72, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x03, 0x75, 0x72, 0x6c, 0x22, 0x20, 0x0a, 0x0c, 0x54, 0x72, 0x61, 0x63, 0x65, 0x4d, 0x65,
-	0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x72, 0x6c, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x03, 0x75, 0x72, 0x6c, 0x22, 0xcc, 0x03, 0x0a, 0x12, 0x48, 0x74, 0x74, 0x70,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x57, 0x72, 0x61, 0x70, 0x70, 0x65, 0x72, 0x12, 0x42,
-	0x0a, 0x08, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b,
-	0x32, 0x26, 0x2e, 0x70, 0x75, 0x6c, 0x6c, 0x2e, 0x48, 0x74, 0x74, 0x70, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x57, 0x72, 0x61, 0x70, 0x70, 0x65, 0x72, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x57, 0x72, 0x61, 0x70, 0x65, 0x72, 0x52, 0x08, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x73, 0x1a, 0xf1, 0x02, 0x0a, 0x0d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x57, 0x72,
-	0x61, 0x70, 0x65, 0x72, 0x12, 0x24, 0x0a, 0x03, 0x67, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x10, 0x2e, 0x70, 0x75, 0x6c, 0x6c, 0x2e, 0x47, 0x65, 0x74, 0x4d, 0x65, 0x73, 0x73,
-	0x61, 0x67, 0x65, 0x48, 0x00, 0x52, 0x03, 0x67, 0x65, 0x74, 0x12, 0x27, 0x0a, 0x04, 0x70, 0x6f,
-	0x73, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x70, 0x75, 0x6c, 0x6c, 0x2e,
-	0x50, 0x6f, 0x73, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x48, 0x00, 0x52, 0x04, 0x70,
-	0x6f, 0x73, 0x74, 0x12, 0x2d, 0x0a, 0x06, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x18, 0x03, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x70, 0x75, 0x6c, 0x6c, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74,
-	0x65, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x48, 0x00, 0x52, 0x06, 0x64, 0x65, 0x6c, 0x65,
-	0x74, 0x65, 0x12, 0x27, 0x0a, 0x04, 0x68, 0x65, 0x61, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b,
-	0x32, 0x11, 0x2e, 0x70, 0x75, 0x6c, 0x6c, 0x2e, 0x48, 0x65, 0x61, 0x64, 0x4d, 0x65, 0x73, 0x73,
-	0x61, 0x67, 0x65, 0x48, 0x00, 0x52, 0x04, 0x68, 0x65, 0x61, 0x64, 0x12, 0x30, 0x0a, 0x07, 0x6f,
-	0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x70,
-	0x75, 0x6c, 0x6c, 0x2e, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x4d, 0x65, 0x73, 0x73, 0x61,
-	0x67, 0x65, 0x48, 0x00, 0x52, 0x07, 0x6f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x2a, 0x0a,
-	0x05, 0x70, 0x61, 0x74, 0x63, 0x68, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x70,
-	0x75, 0x6c, 0x6c, 0x2e, 0x50, 0x61, 0x74, 0x63, 0x68, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
-	0x48, 0x00, 0x52, 0x05, 0x70, 0x61, 0x74, 0x63, 0x68, 0x12, 0x24, 0x0a, 0x03, 0x70, 0x75, 0x74,
-	0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x70, 0x75, 0x6c, 0x6c, 0x2e, 0x50, 0x75,
-	0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x48, 0x00, 0x52, 0x03, 0x70, 0x75, 0x74, 0x12,
-	0x2a, 0x0a, 0x05, 0x74, 0x72, 0x61, 0x63, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12,
-	0x2e, 0x70, 0x75, 0x6c, 0x6c, 0x2e, 0x54, 0x72, 0x61, 0x63, 0x65, 0x4d, 0x65, 0x73, 0x73, 0x61,
-	0x67, 0x65, 0x48, 0x00, 0x52, 0x05, 0x74, 0x72, 0x61, 0x63, 0x65, 0x42, 0x09, 0x0a, 0x07, 0x72,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x2f, 0x0a, 0x0f, 0x5a, 0x69, 0x70, 0x70, 0x65, 0x64,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x73, 0x12, 0x1c, 0x0a, 0x09, 0x72, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0c, 0x52, 0x09, 0x72, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x73, 0x32, 0x4b, 0x0a, 0x06, 0x50, 0x75, 0x6c, 0x6c, 0x65,
-	0x72, 0x12, 0x41, 0x0a, 0x0c, 0x50, 0x75, 0x6c, 0x6c, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63,
-	0x65, 0x12, 0x18, 0x2e, 0x70, 0x75, 0x6c, 0x6c, 0x2e, 0x48, 0x74, 0x74, 0x70, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x57, 0x72, 0x61, 0x70, 0x70, 0x65, 0x72, 0x1a, 0x15, 0x2e, 0x70, 0x75,
-	0x6c, 0x6c, 0x2e, 0x5a, 0x69, 0x70, 0x70, 0x65, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x73, 0x22, 0x00, 0x42, 0x2b, 0x5a, 0x29, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
-	0x6f, 0x6d, 0x2f, 0x42, 0x69, 0x67, 0x2d, 0x4b, 0x6f, 0x74, 0x69, 0x6b, 0x2f, 0x69, 0x76, 0x74,
-	0x2d, 0x70, 0x75, 0x6c, 0x6c, 0x2d, 0x61, 0x70, 0x69, 0x2f, 0x70, 0x6b, 0x67, 0x2f, 0x61, 0x70,
-	0x69, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x72, 0x6f, 0x74, 0x6f, 0x12, 0x04, 0x70, 0x75, 0x6c, 0x6c, 0x22, 0xa4, 0x02, 0x0a, 0x13, 0x48,
+	0x74, 0x74, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x73, 0x57, 0x72, 0x61, 0x70, 0x70,
+	0x65, 0x72, 0x12, 0x3d, 0x0a, 0x08, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x73, 0x18, 0x01,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x70, 0x75, 0x6c, 0x6c, 0x2e, 0x48, 0x74, 0x74, 0x70,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x73, 0x57, 0x72, 0x61, 0x70, 0x70, 0x65, 0x72, 0x2e,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x08, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x73, 0x1a, 0xcd, 0x01, 0x0a, 0x07, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10, 0x0a,
+	0x03, 0x75, 0x72, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x75, 0x72, 0x6c, 0x12,
+	0x16, 0x0a, 0x06, 0x6d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x06, 0x6d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x62, 0x6f, 0x64, 0x79, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x62, 0x6f, 0x64, 0x79, 0x12, 0x48, 0x0a, 0x07, 0x68,
+	0x65, 0x61, 0x64, 0x65, 0x72, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2e, 0x2e, 0x70,
+	0x75, 0x6c, 0x6c, 0x2e, 0x48, 0x74, 0x74, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x73,
+	0x57, 0x72, 0x61, 0x70, 0x70, 0x65, 0x72, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e,
+	0x48, 0x65, 0x61, 0x64, 0x65, 0x72, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x07, 0x68, 0x65,
+	0x61, 0x64, 0x65, 0x72, 0x73, 0x1a, 0x3a, 0x0a, 0x0c, 0x48, 0x65, 0x61, 0x64, 0x65, 0x72, 0x73,
+	0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38,
+	0x01, 0x22, 0x2f, 0x0a, 0x0f, 0x5a, 0x69, 0x70, 0x70, 0x65, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x73, 0x12, 0x1c, 0x0a, 0x09, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0c, 0x52, 0x09, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x73, 0x32, 0x4c, 0x0a, 0x06, 0x50, 0x75, 0x6c, 0x6c, 0x65, 0x72, 0x12, 0x42, 0x0a, 0x0c,
+	0x50, 0x75, 0x6c, 0x6c, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x12, 0x19, 0x2e, 0x70,
+	0x75, 0x6c, 0x6c, 0x2e, 0x48, 0x74, 0x74, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x73,
+	0x57, 0x72, 0x61, 0x70, 0x70, 0x65, 0x72, 0x1a, 0x15, 0x2e, 0x70, 0x75, 0x6c, 0x6c, 0x2e, 0x5a,
+	0x69, 0x70, 0x70, 0x65, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x73, 0x22, 0x00,
+	0x42, 0x2b, 0x5a, 0x29, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x42,
+	0x69, 0x67, 0x2d, 0x4b, 0x6f, 0x74, 0x69, 0x6b, 0x2f, 0x69, 0x76, 0x74, 0x2d, 0x70, 0x75, 0x6c,
+	0x6c, 0x2d, 0x61, 0x70, 0x69, 0x2f, 0x70, 0x6b, 0x67, 0x2f, 0x61, 0x70, 0x69, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -730,37 +234,23 @@ func file_pull_service_proto_rawDescGZIP() []byte {
 	return file_pull_service_proto_rawDescData
 }
 
-var file_pull_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_pull_service_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_pull_service_proto_goTypes = []interface{}{
-	(*GetMessage)(nil),                       // 0: pull.GetMessage
-	(*PostMessage)(nil),                      // 1: pull.PostMessage
-	(*DeleteMessage)(nil),                    // 2: pull.DeleteMessage
-	(*HeadMessage)(nil),                      // 3: pull.HeadMessage
-	(*OptionsMessage)(nil),                   // 4: pull.OptionsMessage
-	(*PatchMessage)(nil),                     // 5: pull.PatchMessage
-	(*PutMessage)(nil),                       // 6: pull.PutMessage
-	(*TraceMessage)(nil),                     // 7: pull.TraceMessage
-	(*HttpRequestWrapper)(nil),               // 8: pull.HttpRequestWrapper
-	(*ZippedResponses)(nil),                  // 9: pull.ZippedResponses
-	(*HttpRequestWrapper_RequestWraper)(nil), // 10: pull.HttpRequestWrapper.RequestWraper
+	(*HttpRequestsWrapper)(nil),         // 0: pull.HttpRequestsWrapper
+	(*ZippedResponses)(nil),             // 1: pull.ZippedResponses
+	(*HttpRequestsWrapper_Request)(nil), // 2: pull.HttpRequestsWrapper.Request
+	nil,                                 // 3: pull.HttpRequestsWrapper.Request.HeadersEntry
 }
 var file_pull_service_proto_depIdxs = []int32{
-	10, // 0: pull.HttpRequestWrapper.requests:type_name -> pull.HttpRequestWrapper.RequestWraper
-	0,  // 1: pull.HttpRequestWrapper.RequestWraper.get:type_name -> pull.GetMessage
-	1,  // 2: pull.HttpRequestWrapper.RequestWraper.post:type_name -> pull.PostMessage
-	2,  // 3: pull.HttpRequestWrapper.RequestWraper.delete:type_name -> pull.DeleteMessage
-	3,  // 4: pull.HttpRequestWrapper.RequestWraper.head:type_name -> pull.HeadMessage
-	4,  // 5: pull.HttpRequestWrapper.RequestWraper.options:type_name -> pull.OptionsMessage
-	5,  // 6: pull.HttpRequestWrapper.RequestWraper.patch:type_name -> pull.PatchMessage
-	6,  // 7: pull.HttpRequestWrapper.RequestWraper.put:type_name -> pull.PutMessage
-	7,  // 8: pull.HttpRequestWrapper.RequestWraper.trace:type_name -> pull.TraceMessage
-	8,  // 9: pull.Puller.PullResource:input_type -> pull.HttpRequestWrapper
-	9,  // 10: pull.Puller.PullResource:output_type -> pull.ZippedResponses
-	10, // [10:11] is the sub-list for method output_type
-	9,  // [9:10] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	2, // 0: pull.HttpRequestsWrapper.requests:type_name -> pull.HttpRequestsWrapper.Request
+	3, // 1: pull.HttpRequestsWrapper.Request.headers:type_name -> pull.HttpRequestsWrapper.Request.HeadersEntry
+	0, // 2: pull.Puller.PullResource:input_type -> pull.HttpRequestsWrapper
+	1, // 3: pull.Puller.PullResource:output_type -> pull.ZippedResponses
+	3, // [3:4] is the sub-list for method output_type
+	2, // [2:3] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_pull_service_proto_init() }
@@ -770,7 +260,7 @@ func file_pull_service_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_pull_service_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetMessage); i {
+			switch v := v.(*HttpRequestsWrapper); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -782,102 +272,6 @@ func file_pull_service_proto_init() {
 			}
 		}
 		file_pull_service_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PostMessage); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_pull_service_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteMessage); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_pull_service_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*HeadMessage); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_pull_service_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*OptionsMessage); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_pull_service_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PatchMessage); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_pull_service_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PutMessage); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_pull_service_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TraceMessage); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_pull_service_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*HttpRequestWrapper); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_pull_service_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ZippedResponses); i {
 			case 0:
 				return &v.state
@@ -889,8 +283,8 @@ func file_pull_service_proto_init() {
 				return nil
 			}
 		}
-		file_pull_service_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*HttpRequestWrapper_RequestWraper); i {
+		file_pull_service_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*HttpRequestsWrapper_Request); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -902,23 +296,13 @@ func file_pull_service_proto_init() {
 			}
 		}
 	}
-	file_pull_service_proto_msgTypes[10].OneofWrappers = []interface{}{
-		(*HttpRequestWrapper_RequestWraper_Get)(nil),
-		(*HttpRequestWrapper_RequestWraper_Post)(nil),
-		(*HttpRequestWrapper_RequestWraper_Delete)(nil),
-		(*HttpRequestWrapper_RequestWraper_Head)(nil),
-		(*HttpRequestWrapper_RequestWraper_Options)(nil),
-		(*HttpRequestWrapper_RequestWraper_Patch)(nil),
-		(*HttpRequestWrapper_RequestWraper_Put)(nil),
-		(*HttpRequestWrapper_RequestWraper_Trace)(nil),
-	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_pull_service_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
