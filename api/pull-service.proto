@@ -14,6 +14,7 @@ message HttpRequests {
         string method = 2;
         string body = 3;
         map<string, Header> headers = 4;
+        bytes uuid = 5;
     }
 
     repeated HttpRequest requests = 1;
@@ -26,6 +27,7 @@ message HttpResponse {
     map<string, Header> header = 4;
     bytes body = 5;
     int64 contentLength = 6;
+    bytes uuid = 7;
 }
 
 service Puller {
