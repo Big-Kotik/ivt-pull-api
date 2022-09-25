@@ -12,7 +12,7 @@ message HttpRequests {
     message HttpRequest {
         string url = 1;
         string method = 2;
-        string body = 3;
+        bytes body = 3;
         map<string, Header> headers = 4;
         bytes uuid = 5;
     }
